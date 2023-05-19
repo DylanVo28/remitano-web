@@ -5,7 +5,7 @@ import { redirect } from "react-router-dom";
 import { logout } from "../../store/auth/authSlice";
 import store from "../../store";
 
-const baseURL = "https://103.168.51.86/";
+const baseURL = "https://remitano-service-production.up.railway.app/";
 
 export type ServerError = {
   path: string;
@@ -22,6 +22,8 @@ const publicClient = axios.create({
 });
 
 publicClient.interceptors.request.use((config) => {
+  config.headers.set("Access-Control-Allow-Origin", `*`);
+  config.headers.set("Access-Control-Allow-Methods", `GET,PUT,POST,DELETE,PATCH,OPTIONS`);
   config.headers.set("Content-Type", `application/json`);
   return config;
 });

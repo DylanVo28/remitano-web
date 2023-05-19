@@ -5,7 +5,7 @@ import { logout } from "../../store/auth/authSlice";
 import { redirect } from "react-router-dom";
 import store from "../../store";
 
-const baseURL = "https://103.168.51.86/";
+const baseURL = "https://remitano-service-production.up.railway.app/";
 
 export type ServerError = {
   path: string;
@@ -23,6 +23,8 @@ const privateClient = axios.create({
 
 privateClient.interceptors.request.use((config) => {
   const { accessToken } = store.getState().auth;
+  config.headers.set("Access-Control-Allow-Origin", `*`);
+  config.headers.set("Access-Control-Allow-Methods", `GET,PUT,POST,DELETE,PATCH,OPTIONS`);
   config.headers.set("Content-Type", `application/json`);
   config.headers.set("Authorization", `Bearer ${accessToken}`);
   return config;

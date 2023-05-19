@@ -1,3 +1,3 @@
 import {io} from "socket.io-client";
 
-export const socket = io('wss://103.168.51.86/notifications')
+export const socket = io('wss://remitano-service-production.up.railway.app/notifications')
